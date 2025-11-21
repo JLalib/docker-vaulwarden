@@ -1,0 +1,14 @@
+services:
+  vaultwarden:
+    image: vaultwarden/server:latest
+    container_name: vaultwarden
+    volumes:
+      - ./vaultwarden:/data
+    ports:
+      - "8200:80"
+    restart: unless-stopped
+    environment:
+      ADMIN_TOKEN: "$$argon2id$$v=19$$m=65540,t=3,p=4$$b0e6fTOKENSEGURO4rfU" #Generar con: docker run --rm -it vaultwarden/server /vaultwarden hash
+      SIGNUPS_ALLOWED: "false"
+      WEBSOCKET_ENABLED: "true"
+      DOMAIN: "http://localhost:8200"
